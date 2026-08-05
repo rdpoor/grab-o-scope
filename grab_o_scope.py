@@ -42,6 +42,16 @@ class Keysight3000XGrabber(Grabber):
         buf = instrument.query_binary_values(':DISPlay:DATA? PNG,COLOR', datatype='B')
         return buf
 
+class KeysightHD3Grabber(Grabber):
+    """Grabber for the Keysight InfiniiVision HD3 Series Oscilloscopes."""
+    IDN_PATTERN = r'KEYSIGHT TECHNOLOGIES,HD3.*'
+
+    @classmethod
+    def capture_screen(cls, instrument):
+        # Query the screen image as PNG
+        buf = instrument.query_binary_values(':DISPlay:DATA? PNG', datatype='B')
+        return buf
+
 class RigolDHO924Grabber(Grabber):
     """Grabber for the Rigol DHO924 oscilloscope."""
     IDN_PATTERN = r'RIGOL TECHNOLOGIES,DHO924,DHO.*'
@@ -69,6 +79,7 @@ class GrabOScope:
 
     KNOWN_GRABBERS = [
         Keysight3000XGrabber,
+        KeysightHD3Grabber,
         RigolDHO924Grabber,
         RigolDS1054ZGrabber,
     ]

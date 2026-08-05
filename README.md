@@ -22,6 +22,8 @@ under Windows, Linux and macOS.
 
 - Keysight InfiniVision 3000T X-Series Oscilloscopes
   - Tested on: DSOX 3012T
+- Keysight InfiniiVision HD3 Series Oscilloscopes
+  - Tested on: HD304MSO
 - Rigol DHO924
 - Rigol DS1054Z
 
@@ -143,7 +145,7 @@ This will write a filename of the form "2024-11-03T07:29:02-08:00.png", which so
 
 ### Implementation Details
 
-`grab-o-scope` uses the pyvisa module to search for connected instruments, identifies compatible oscilloscopes by querying their IDN strings, and then uses the appropriate grabber class (e.g., RigolDHO924Grabber or RigolDS1054ZGrabber) to retrieve display data.
+`grab-o-scope` uses the pyvisa module to search for connected instruments, identifies compatible oscilloscopes by querying their IDN strings, and then uses the appropriate grabber class (e.g., KeysightHD3Grabber, Keysight3000XGrabber, RigolDHO924Grabber, or RigolDS1054ZGrabber) to retrieve display data.
 
 #### Step 1: Find all VISA resources
 
