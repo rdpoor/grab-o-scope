@@ -70,6 +70,17 @@ class RigolDS1054ZGrabber(Grabber):
         buf = instrument.query_binary_values(':DISP:DATA? ON,0,PNG', datatype='B')
         return buf
 
+class RohdeSchwarzRTBGrabber(Grabber):
+    """Grabber for the Rohde & Schwarz RTB oscilloscopes."""
+    # This has only been tested with the RTB2002, but likely works with all RTB models
+    IDN_PATTERN = r'(?i)Rohde\s*&\s*Schwarz,RTB\d+.*' # Case insensitive and all RTB models
+
+    @classmethod
+    def capture_screen(cls, instrument):
+        instrument.write('HCOPy:LANGuage PNG') # Set format to PNG
+        buf = instrument.query_binary_values('HCOPy:DATA?', datatype='B')
+        return buf
+
 # ******************************************************************************
 # Add device-specific subclasses of Grabber above this line.
 # ******************************************************************************
@@ -82,6 +93,7 @@ class GrabOScope:
         KeysightHD3Grabber,
         RigolDHO924Grabber,
         RigolDS1054ZGrabber,
+        RohdeSchwarzRTBGrabber,
     ]
 
     def __init__(self, options):

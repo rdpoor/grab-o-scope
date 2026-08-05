@@ -26,6 +26,8 @@ under Windows, Linux and macOS.
   - Tested on: HD304MSO
 - Rigol DHO924
 - Rigol DS1054Z
+- Rohde & Schwarz RTB2 Series
+  - Tested on: RTB2002
 
 ## Installation
 
